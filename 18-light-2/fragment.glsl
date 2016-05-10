@@ -12,6 +12,10 @@ uniform vec3 ambient;
 uniform vec3 diffuse;
 uniform vec3 lightDirection;
 
+varying vec3 fragNormal;
+
 void main() {
-  gl_FragColor = vec4(1,1,1,1);
+  float brightness = dot(fragNormal, lightDirection);
+  gl_FragColor = vec4(ambient + diffuse * max(brightness, 0.0), 1);
+
 }
